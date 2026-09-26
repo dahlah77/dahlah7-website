@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "build": "mkdir -p dist && cp *.html dist/ && cp robots.txt dist/robots.txt && cp -r assets dist/assets"
+    "build": "mkdir -p dist && cp *.html dist/ && cp robots.txt dist/robots.txt && cp sitemap.xml dist/sitemap.xml && cp -r assets dist/assets"
   },
   "dependencies": {},
   "devDependencies": {}
