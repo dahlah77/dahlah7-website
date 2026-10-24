@@ -3,7 +3,7 @@
     {
       "source": "/oauth-callback.html",
       "headers": [
-        { "key": "Cache-Control", "value": "no-store, max-age=0" },
+        { "key": "Cache-Control", "value": "private, no-store, max-age=0, must-revalidate" },
         { "key": "Pragma", "value": "no-cache" },
         { "key": "Referrer-Policy", "value": "no-referrer" },
         { "key": "X-Content-Type-Options", "value": "nosniff" },
