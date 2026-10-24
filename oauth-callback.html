@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <title>DAHLAH7 · OAuth callback</title>
+  <style>
+    :root { color-scheme: light; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    body { margin: 0; min-height: 100vh; display: grid; place-items: center; background: #f5f7fa; color: #101828; }
+    main { box-sizing: border-box; width: min(92vw, 560px); padding: 32px; background: #fff; border: 1px solid #e4e7ec; border-radius: 16px; }
+    h1 { margin-top: 0; font-size: 1.35rem; }
+    p { line-height: 1.6; color: #475467; }
+    .status { font-weight: 600; color: #027a48; }
+    .warning { margin-top: 24px; padding-top: 16px; border-top: 1px solid #eaecf0; font-size: .9rem; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>DAHLAH7 account authorization</h1>
+    <p id="status" class="status">Checking authorization response…</p>
+    <p id="detail">This page does not store or send the authorization code to another service.</p>
+    <p class="warning">Keep this tab open while the local Hermes helper checks the callback. Do not copy or share this page URL because it may contain temporary authorization parameters. You may close this tab after Hermes reports the authorization result.</p>
+  </main>
+  <script>
+    (() => {
+      const q = new URLSearchParams(window.location.search);
+      const hasCode = q.has("code");
+      const hasState = q.has("state");
+      const hasError = q.has("error");
+      const status = document.getElementById("status");
+      const detail = document.getElementById("detail");
+      if (hasError) {
+        status.textContent = "Authorization was not completed.";
+        status.style.color = "#b42318";
+        detail.textContent = "The provider returned an authorization error. Return to the local Hermes terminal for a safe diagnostic.";
+      } else if (hasCode && hasState) {
+        status.textContent = "Authorization response received.";
+        detail.textContent = "The response is present in this tab for the local helper to validate. This page does not send it anywhere.";
+      } else {
+        status.textContent = "Callback page is ready.";
+        detail.textContent = "No authorization response was found in this page URL. Start authorization from the local Hermes helper after registering this exact callback URL.";
+      }
+    })();
+  </script>
+</body>
+</html>
