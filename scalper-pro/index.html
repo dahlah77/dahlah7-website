@@ -1,191 +1,291 @@
 <!doctype html>
 <html lang="id">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#06101b">
-<meta name="description" content="DAHLAH7 Scalper Pro: indikator TradingView untuk membaca sinyal, market structure, zona SMC, dan level Entry/SL/TP. Lisensi sekali bayar, transaksi via Threads.">
-<meta property="og:title" content="DAHLAH7 Scalper Pro — TradingView Glass Edition">
-<meta property="og:description" content="Satu indikator, analisis lebih terstruktur. Pesan langsung melalui Threads.">
-<meta property="og:type" content="website">
-<title>DAHLAH7 Scalper Pro — TradingView Indicator</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<style>
-:root{--bg:#06101b;--text:#edf9ff;--muted:#a1b7c8;--cyan:#4ae9fe;--mint:#7cf9d5;--rose:#ff819d;--line:rgba(155,221,250,.2);--glass:rgba(39,80,107,.13);font-synthesis:none}
-*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:95px}body{margin:0;background:var(--bg);color:var(--text);font:15px/1.7 'DM Sans',sans-serif;overflow-x:hidden}
-body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-2;background:radial-gradient(ellipse 58% 38% at 48% 6%,rgba(33,140,181,.31),transparent 75%),radial-gradient(ellipse 30% 30% at 97% 47%,rgba(107,78,196,.2),transparent 70%),radial-gradient(ellipse 35% 25% at 2% 78%,rgba(7,150,163,.18),transparent 74%),#06101b}
-body:after{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;background-image:linear-gradient(rgba(163,215,242,.027) 1px,transparent 1px),linear-gradient(90deg,rgba(163,215,242,.027) 1px,transparent 1px);background-size:64px 64px;mask-image:linear-gradient(black,transparent 85%)}
-button,input,textarea{font:inherit}button{cursor:pointer}button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,summary:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}a{color:inherit;text-decoration:none}
-.wrap{width:min(1180px,calc(100% - 44px));margin-inline:auto}.muted{color:var(--muted)}.glass{background:linear-gradient(142deg,rgba(127,192,226,.16),rgba(37,72,108,.11) 51%,rgba(11,32,52,.38));border:1px solid var(--line);box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 25px 75px rgba(0,0,0,.17);backdrop-filter:blur(26px) saturate(130%);-webkit-backdrop-filter:blur(26px) saturate(130%)}
-.accent{background:linear-gradient(110deg,#b0ffff 6%,#60d7f5 57%,#b5aaff);-webkit-background-clip:text;background-clip:text;color:transparent}
-.kicker{color:#72dcec;font-size:11px;letter-spacing:.22em;font-weight:800;text-transform:uppercase}
-.btn{border:1px solid transparent;border-radius:13px;padding:13px 21px;display:inline-flex;align-items:center;justify-content:center;gap:14px;font-weight:800;font-size:13px;line-height:1.4;transition:transform .2s,border .2s,background .2s}
-.btn:hover{transform:translateY(-2px)}.primary{color:#061820;background:linear-gradient(110deg,#90faff,#4ae9fe 60%,#91c0fa);box-shadow:0 8px 30px rgba(74,233,254,.18),inset 0 1px rgba(255,255,255,.75)}.secondary{border-color:rgba(158,225,249,.33);background:rgba(132,191,226,.08);color:#e8f8ff}.btn-full{width:100%}
-.topline{background:linear-gradient(90deg,rgba(9,45,64,.9),rgba(17,36,54,.9));border-bottom:1px solid rgba(255,255,255,.06);text-align:center;padding:7px 14px;font-size:10px;letter-spacing:.17em;font-weight:800;color:#b1eaf1}
-.dot{display:inline-block;width:7px;height:7px;background:var(--mint);border-radius:50%;vertical-align:middle;box-shadow:0 0 14px #76f8d5b0;margin-right:8px}
-header{position:sticky;z-index:20;top:0;background:rgba(5,15,28,.68);border-bottom:1px solid rgba(158,223,245,.13);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px)}
-nav{height:78px;display:flex;justify-content:space-between;align-items:center;gap:25px}
-.logo{display:flex;align-items:center;gap:11px;font-family:'Space Grotesk';font-weight:800;font-size:20px;letter-spacing:-.06em;line-height:1.1}.mark{display:grid;place-items:center;width:41px;height:41px;border-radius:13px;background:linear-gradient(145deg,rgba(75,202,241,.29),rgba(85,109,180,.12));border:1px solid rgba(142,238,255,.5);box-shadow:inset 0 1px rgba(255,255,255,.25),0 0 30px rgba(74,233,254,.12)}.mark b{color:var(--cyan)}.logo small{display:block;font:800 8px 'DM Sans';color:#91a9b5;letter-spacing:.25em;margin-top:5px}
-.links{display:flex;gap:28px;font-size:12px;font-weight:700;color:#c0d0dc}.links a:hover,.footlinks a:hover{color:var(--cyan)}#menuBtn{display:none}
-.hero{padding-top:93px;padding-bottom:75px;display:grid;grid-template-columns:1.06fr .94fr;gap:35px;align-items:center;position:relative}
-.hero:before{content:"";position:absolute;width:680px;height:390px;top:-80px;left:-140px;pointer-events:none;background:radial-gradient(ellipse,rgba(91,215,255,.11),transparent 75%);filter:blur(35px)}
-.pill{width:max-content;max-width:100%;padding:8px 16px;margin-bottom:27px;color:#bcf0f2;border-radius:100px;font-size:10px;letter-spacing:.12em;font-weight:800}
-.hero h1{font:800 clamp(47px,5.9vw,83px)/1.055 'Space Grotesk';letter-spacing:-.085em;margin:0 0 25px}
-.hero p{color:#a3bccb;font-size:15px;max-width:570px;line-height:1.9;margin:0 0 27px}.heroactions{display:flex;gap:12px;flex-wrap:wrap}.benefits{display:flex;gap:20px;flex-wrap:wrap;color:#b2cfda;font-size:11px;margin-top:26px}.benefits span:before{content:"✓";color:var(--mint);font-weight:900;margin-right:7px}
-.terminal{border-radius:23px;overflow:hidden;position:relative;transform:perspective(1100px) rotateY(-4deg) rotateX(1deg);box-shadow:0 32px 100px rgba(0,0,0,.44),0 0 60px rgba(58,188,234,.07),inset 0 1px rgba(255,255,255,.2)}
-.termbar{height:48px;padding:0 17px;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--line);background:rgba(10,27,46,.36)}.windowdots{display:flex;gap:5px}.windowdots i{height:7px;width:7px;border-radius:50%;background:#91b9ce60}.windowdots i:first-child{background:#fa8f9a}.windowdots i:nth-child(2){background:#f5d18f}.windowdots i:nth-child(3){background:#75ecd4}.ticker{font:700 11px 'Space Grotesk';margin-left:7px;letter-spacing:.02em}.tframe{margin-left:auto;color:#9de8fa;font:700 10px 'Space Grotesk'}
-.chartwrap{padding:15px 10px 12px;overflow-x:auto;scrollbar-width:thin}.chartwrap svg{display:block;width:100%;min-width:380px}.termfoot{display:flex;gap:12px;align-items:center;justify-content:space-between;padding:13px 20px;border-top:1px solid var(--line);font-size:10px;color:#83abb7;flex-wrap:wrap}.termfoot strong{color:#88edda}.mini{border:1px solid rgba(114,219,246,.19);padding:3px 8px;border-radius:6px}
-.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:104px}.metric{border-radius:15px;padding:20px 22px;display:flex;gap:15px;align-items:center}.metric .symbol{font:700 27px 'Space Grotesk';color:#83f2ee}.metric strong{display:block;font:700 13px 'Space Grotesk'}.metric small{font-size:10px;color:#8cabb8}
-.section{padding:45px 0 95px}.sectionhead{display:flex;align-items:end;justify-content:space-between;gap:35px;margin-bottom:37px}.sectionhead h2{font:800 clamp(34px,4.6vw,57px)/1.12 'Space Grotesk';letter-spacing:-.07em;margin:12px 0 0}.sectionhead p{color:#a0b4c1;max-width:370px;margin:0;font-size:13px}
-.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}.card{padding:28px;border-radius:19px;min-height:237px;display:flex;flex-direction:column;transition:transform .2s,border .2s}.card:hover{transform:translateY(-4px);border-color:rgba(144,240,255,.45)}.cardicon{font:700 31px 'Space Grotesk';color:#86e7f2;margin-bottom:auto;min-height:64px}.card b{font:700 20px 'Space Grotesk';letter-spacing:-.05em}.card p{color:#94b0c1;font-size:12px;margin:10px 0 0;line-height:1.8}
-.demo{padding:23px 25px 21px;border-radius:22px}.demo-top{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}.demo-top b{font:700 17px 'Space Grotesk'}.tabs{display:inline-flex;gap:5px;padding:4px;border:1px solid var(--line);border-radius:11px;background:rgba(1,16,28,.32)}.tabs button{border:0;background:transparent;color:#96b4c2;border-radius:8px;padding:7px 13px;font-size:12px;font-weight:800}.tabs button[aria-pressed=true]{background:#88f0f6;color:#081b26}
-.demo-svg{width:100%;display:block;margin-top:12px;min-height:230px}.demo-caption{font-size:11px;color:#91a6b7;margin:6px 0 0}
-.how{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}.step{padding:29px;border-radius:19px}.stepnum{display:block;color:#6eddec;font:700 28px 'Space Grotesk';margin-bottom:30px}.step h3{font:700 20px 'Space Grotesk';letter-spacing:-.04em;margin:0 0 10px}.step p{color:#99b3c3;font-size:12px;margin:0}
-.price{border-radius:25px;padding:48px;display:grid;grid-template-columns:1fr .8fr;gap:50px;align-items:center;overflow:hidden;position:relative}.price:before{content:"";pointer-events:none;position:absolute;width:460px;height:290px;bottom:-170px;left:10%;background:#248cb640;filter:blur(72px)}.price>div{position:relative}
-.price h2{font:800 clamp(40px,5vw,65px)/1.14 'Space Grotesk';letter-spacing:-.075em;margin:14px 0}.price p{font-size:13px;color:#a6c0cb;max-width:460px}.ticks{padding:0;list-style:none;display:grid;gap:11px;font-size:13px;color:#d1e8eb;margin-top:30px}.ticks li:before{content:"✓";color:var(--mint);margin-right:10px}
-.pricebox{border-radius:19px;padding:29px;background:rgba(4,22,36,.43);border:1px solid rgba(181,237,255,.3);box-shadow:inset 0 1px rgba(255,255,255,.11),0 15px 50px #0003}.pricebox label{color:#79d3dd;font-weight:800;font-size:10px;letter-spacing:.15em}.pricebox h3{font:800 clamp(22px,2.6vw,32px) 'Space Grotesk';letter-spacing:-.045em;margin:17px 0}.pricebox hr{border:0;border-top:1px solid var(--line);margin:20px 0}.price-row{display:flex;align-items:center;justify-content:space-between;font-size:12px;color:#a0bfca;margin:11px 0}.price-row b{color:#e0f5f8}.pricebox small{font-size:10px;color:#8caeb9;display:block;margin-top:14px;line-height:1.7}
-.faq{max-width:900px}.faq details{border-bottom:1px solid var(--line)}.faq summary{list-style:none;display:flex;align-items:center;justify-content:space-between;padding:22px 0;cursor:pointer;font-weight:700;font-size:14px;gap:18px}.faq summary::-webkit-details-marker{display:none}.faq summary:after{content:"+";font:400 26px 'Space Grotesk';color:#7bdeed}.faq details[open] summary:after{content:"−"}.faq details p{color:#a0b6c6;font-size:13px;line-height:1.8;max-width:720px;margin:0 0 20px}
-.lastcta{border-radius:25px;text-align:center;padding:74px 25px;margin-bottom:90px;background:radial-gradient(ellipse 58% 65% at 50% 110%,rgba(57,180,217,.27),transparent),linear-gradient(135deg,rgba(71,159,214,.15),rgba(10,26,44,.43))}.lastcta h2{font:800 clamp(40px,6vw,73px)/1.1 'Space Grotesk';letter-spacing:-.07em;margin:16px 0}.lastcta p{color:#a2bbc8;font-size:13px;margin-bottom:26px}
-footer{border-top:1px solid var(--line);background:#061321aa;padding:40px 0 24px}.footerline{display:flex;justify-content:space-between;align-items:center;gap:25px;flex-wrap:wrap}.footlinks{display:flex;gap:18px;color:#a9c2cd;font-size:12px}.legal{border-top:1px solid var(--line);margin-top:32px;padding-top:18px;color:#88a5b4;font-size:10px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
-.overlay{position:fixed;inset:0;z-index:70;display:grid;place-items:center;background:rgba(0,7,16,.8);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);padding:14px}.overlay[hidden],[hidden]{display:none!important}.dialog{width:min(510px,100%);max-height:94vh;overflow-y:auto;border-radius:24px;padding:32px;position:relative;background:linear-gradient(145deg,rgba(33,67,97,.95),rgba(5,20,36,.97));border:1px solid rgba(144,215,245,.39);box-shadow:0 35px 110px #000b,inset 0 1px rgba(255,255,255,.12)}.close{position:absolute;right:18px;top:12px;border:0;background:transparent;color:white;font-size:26px}.dialog h2{font:800 28px/1.2 'Space Grotesk';letter-spacing:-.05em;margin:11px 0}.dialog>p{font-size:12px;color:#adcad7;line-height:1.8}.form{display:grid;gap:10px}.form label{color:#d4eff7;font-size:12px;font-weight:700;margin-top:8px}.form input,.form textarea,#messageText{width:100%;border:1px solid rgba(157,224,250,.25);border-radius:11px;background:rgba(5,18,32,.67);color:#eefbff;padding:11px 12px;resize:vertical;font-size:13px}.form input::placeholder,.form textarea::placeholder{color:#658c9f}.notice{color:#9bb8c8;font-size:11px;line-height:1.7;margin:12px 0}.result-actions{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:15px}.result-actions .wide{grid-column:1/-1}.result-actions .btn{padding:13px 12px;font-size:11px;white-space:normal;text-align:center}.toast{position:fixed;bottom:22px;left:50%;z-index:99;transform:translate(-50%,22px);background:#b7f7fb;color:#071c27;font-size:12px;font-weight:800;padding:12px 18px;border-radius:12px;box-shadow:0 10px 50px #0008;opacity:0;pointer-events:none;transition:.25s}.toast.show{transform:translate(-50%,0);opacity:1}
-@media(max-width:950px){.hero{grid-template-columns:1fr;text-align:center;padding-top:75px}.hero p{margin-inline:auto}.pill{margin-inline:auto}.heroactions,.benefits{justify-content:center}.terminal{max-width:720px;width:100%;margin-inline:auto;transform:none}.metrics{grid-template-columns:repeat(2,1fr)}.cards{grid-template-columns:repeat(2,1fr)}.price{grid-template-columns:1fr;gap:20px}.sectionhead{align-items:start;flex-direction:column}.sectionhead p{max-width:600px}}
-@media(max-width:660px){.wrap{width:min(100% - 30px,1180px)}nav{height:68px}.logo{font-size:18px}.mark{width:36px;height:36px}.navcta{display:none}#menuBtn{display:block;border:1px solid var(--line);background:rgba(87,152,187,.13);border-radius:9px;color:white;padding:8px 12px}.links{display:none;position:absolute;left:0;right:0;top:68px;background:rgba(6,24,40,.97);padding:22px;flex-direction:column;gap:16px;border-bottom:1px solid var(--line)}.links.open{display:flex}.topline{font-size:8px}.hero{padding-top:62px;padding-bottom:46px}.hero h1{font-size:clamp(44px,11vw,62px)}.hero p{font-size:13px}.heroactions{flex-direction:column}.heroactions .btn{width:100%}.benefits{gap:10px 16px}.metrics{margin-bottom:56px}.metric{padding:14px;gap:9px}.metric .symbol{font-size:22px}.metric strong{font-size:11px}.metric small{font-size:9px}.cards,.how{grid-template-columns:1fr}.card{min-height:186px}.cardicon{min-height:50px}.section{padding:32px 0 70px}.price{padding:23px}.pricebox{padding:22px}.demo{padding:16px 12px}.demo-svg{min-height:145px}.lastcta{padding:55px 18px;margin-bottom:65px}.dialog{padding:26px 20px}.result-actions .btn{gap:6px}.termfoot{padding:12px 13px}}
-@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important}}
-</style>
-<link rel="stylesheet" href="./liquid-glass.css?v=2">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b1117">
+  <meta name="description" content="DAHLAH7 Scalper Pro: indikator TradingView dengan sinyal BUY/SELL, market structure, serta level Entry, Stop Loss, dan Take Profit. Sekali bayar, pesan melalui Threads.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="DAHLAH7 Scalper Pro — Trading lebih jernih">
+  <meta property="og:description" content="Sinyal, struktur pasar, dan manajemen risiko dalam satu indikator TradingView. Akses lifetime, transaksi via Threads.">
+  <meta property="og:url" content="https://dahlah7-scalper-pro.vercel.app/">
+  <link rel="canonical" href="https://dahlah7-scalper-pro.vercel.app/">
+  <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+  <link rel="stylesheet" href="./styles.css">
+  <title>DAHLAH7 Scalper Pro | Indikator TradingView Lifetime</title>
+  <script type="module" src="./app.mjs"></script>
 </head>
 <body>
-<div class="liquid-ambient" aria-hidden="true"><div class="ambient-orb one"></div><div class="ambient-orb two"></div></div>
-<div class="topline"><span class="dot"></span>DAHLAH7 SCALPER PRO <span style="opacity:.5;margin:0 10px">/</span> ONE-TIME LICENSE · TRANSAKSI VIA THREADS</div>
-<header><nav class="wrap" aria-label="Navigasi utama"><a class="logo" href="#top"><span class="mark">D<b>7</b></span><span>DAHLAH<span style="color:var(--cyan)">7</span><small>TRADING TOOLS</small></span></a>
-<div class="links" id="links"><a href="#fitur">Fitur</a><a href="#demo">Demo</a><a href="#alur">Cara Pemesanan</a><a href="#harga">Lisensi</a><a href="#faq">FAQ</a></div>
-<button class="btn primary navcta" type="button" data-order>Pesan via Threads ↗</button><button id="menuBtn" type="button" aria-expanded="false" aria-controls="links" aria-label="Buka navigasi">☰</button><span class="waterdrop" aria-hidden="true"></span><span class="waterdrop small" aria-hidden="true"></span><span class="waterdrop tiny" aria-hidden="true"></span>
-<button id="liquidMenuBtn" type="button" aria-label="Buka liquid menu" aria-controls="liquidMenuOverlay" aria-expanded="false" title="Menu utama"><span aria-hidden="true">☷</span></button></nav></header>
-<aside class="liquid-dock" id="liquidDock" aria-label="Navigasi pintas glassmorphism">
-<button type="button" class="dock-handle" id="dockToggle" aria-expanded="false" aria-label="Perluas sidebar" aria-controls="dockNav">❯</button>
-<div class="dock-emblem"><span class="dock-icon" aria-hidden="true">D7</span><span class="dock-label">DAHLAH7</span></div>
-<div class="dock-nav" id="dockNav">
-<a class="dock-link dock-selected" href="#top" aria-label="Beranda" title="Beranda"><span class="dock-icon" aria-hidden="true">⌂</span><span class="dock-label">Beranda</span></a>
-<a class="dock-link" href="#fitur" aria-label="Fitur indikator" title="Fitur"><span class="dock-icon" aria-hidden="true">✧</span><span class="dock-label">Fitur</span></a>
-<a class="dock-link" href="#demo" aria-label="Demo interaktif" title="Demo"><span class="dock-icon" aria-hidden="true">▥</span><span class="dock-label">Demo</span></a>
-<a class="dock-link" href="#alur" aria-label="Cara pemesanan" title="Cara Pesan"><span class="dock-icon" aria-hidden="true">↗</span><span class="dock-label">Cara Pesan</span></a>
-<a class="dock-link" href="#harga" aria-label="Lisensi lifetime" title="Lisensi"><span class="dock-icon" aria-hidden="true">◇</span><span class="dock-label">Lisensi</span></a>
-<a class="dock-link" href="#faq" aria-label="FAQ" title="FAQ"><span class="dock-icon" aria-hidden="true">?</span><span class="dock-label">FAQ</span></a>
-</div><span class="waterdrop" aria-hidden="true"></span><span class="waterdrop small" aria-hidden="true"></span></aside>
-<main id="top">
-<section class="hero wrap">
-<div><div class="pill glass"><span class="dot"></span> TRADINGVIEW INDICATOR · DAHLAH7</div><div class="kicker">BETTER CONTEXT. CLEARER DECISIONS.</div><h1>Trade with <span class="accent">clarity.</span><br>Not with noise.</h1>
-<p>Analisis arah tren, sinyal BUY/SELL, market structure, dan level Entry, Stop Loss, serta Take Profit dalam satu workspace TradingView. Dibuat untuk membantu keputusan trading lebih terstruktur — bukan menjanjikan profit.</p>
-<div class="heroactions"><button type="button" class="btn primary" data-order>Pesan Indikator Lifetime ↗</button><a class="btn secondary" href="#demo">Lihat Demo Interaktif ◉</a></div>
-<div class="benefits"><span>Sekali bayar</span><span>Tanpa subscription</span><span>Chat langsung di Threads</span></div></div>
-<div class="terminal glass" aria-label="Ilustrasi dashboard trading DAHLAH7">
-<div class="termbar"><div class="windowdots"><i></i><i></i><i></i></div><div class="ticker">₿ BTC / USDT <span style="color:#84a9b9;font-weight:400">· DEMO</span></div><div class="tframe">15m <span class="dot" style="margin-left:7px"></span></div></div>
-<div class="chartwrap"><svg id="heroChart" viewBox="0 0 550 340" role="img" aria-label="Candlestick simulasi dengan sinyal dan pemetaan TP, Entry, SL"></svg></div>
-<div class="termfoot"><span><strong>▲ BUY</strong> / ▼ SELL</span><span class="mini">ENTRY · SL · TP1 · TP2 · TP3</span><span>Data simulasi</span></div></div></section>
-<div class="metrics wrap"><div class="metric glass"><div class="symbol">⌁</div><div><strong>Market Structure</strong><small>BOS / CHoCH</small></div></div><div class="metric glass"><div class="symbol">◇</div><div><strong>Risk Mapping</strong><small>Entry / SL / TP</small></div></div><div class="metric glass"><div class="symbol">▧</div><div><strong>Smart Zones</strong><small>Order Block / FVG</small></div></div><div class="metric glass"><div class="symbol">↗</div><div><strong>Trend Context</strong><small>Cloud / ADX</small></div></div></div>
-<section id="fitur" class="section wrap"><div class="sectionhead"><div><div class="kicker">01 / FEATURE SET</div><h2>Lebih banyak konteks.<br><span class="accent">Lebih sedikit tebakan.</span></h2></div><p>Komponen teknikal digabungkan untuk membantu evaluasi peluang, kondisi pasar, serta manajemen risiko di dalam satu chart.</p></div>
-<div class="cards"><article class="card glass"><span class="cardicon">↗</span><b>Sinyal BUY & SELL</b><p>Penanda arah sinyal pada candle terkonfirmasi, sehingga lebih mudah dipantau dan dievaluasi.</p></article>
-<article class="card glass"><span class="cardicon">⌗</span><b>Entry, SL & TP1–TP3</b><p>Pemetaan level rencana entry, batas risiko, dan tiga target take profit berbasis parameter indikator.</p></article>
-<article class="card glass"><span class="cardicon">⌁</span><b>BOS / CHoCH</b><p>Pembacaan kelanjutan atau perubahan struktur harga sebagai konteks tambahan dalam analisis.</p></article>
-<article class="card glass"><span class="cardicon">▥</span><b>Order Block & FVG</b><p>Area relevan untuk melihat potensi reaksi harga serta ketidakseimbangan harga.</p></article>
-<article class="card glass"><span class="cardicon">〰</span><b>Trend Cloud & ADX</b><p>Konteks arah tren serta filter kondisi pasar yang sedang bergerak atau cenderung sideways.</p></article>
-<article class="card glass"><span class="cardicon">⊞</span><b>Liquidity & Zones</b><p>EQH/EQL, premium/discount, dan zona equilibrium untuk melengkapi pembacaan struktur pasar.</p></article></div></section>
-<section id="demo" class="section wrap"><div class="sectionhead"><div><div class="kicker">02 / INTERACTIVE PREVIEW</div><h2>See the structure.<br><span class="accent">Plan the risk.</span></h2></div><p>Pilih timeframe untuk melihat contoh visual sinyal dan zona. Semua nilai grafik di bawah adalah simulasi, bukan feed live maupun bukti backtest.</p></div>
-<div class="demo glass"><div class="demo-top"><div><div class="kicker" style="font-size:9px">DAHLAH7 / SCALPER PRO</div><b>BTCUSDT · Chart demonstration</b></div><div class="tabs" role="group" aria-label="Timeframe demo"><button type="button" class="tf" data-tf="M15" aria-pressed="true">M15</button><button type="button" class="tf" data-tf="M30" aria-pressed="false">M30</button><button type="button" class="tf" data-tf="H1" aria-pressed="false">H1</button></div></div><svg class="demo-svg" id="demoChart" viewBox="0 0 980 365" role="img" aria-label="Simulasi chart dengan candlestick, zona, dan level risiko"></svg><p class="demo-caption">Ilustrasi visual saja. Performa aktual dan akurasi sinyal memerlukan pengujian terpisah.</p></div></section>
-<section class="section wrap" id="alur"><div class="sectionhead"><div><div class="kicker">03 / ORDER FLOW</div><h2>Pemesanan simpel.<br><span class="accent">Transaksi di Threads.</span></h2></div><p>Website menyiapkan teks pesanan. Tidak ada pembayaran di halaman ini; seluruh konfirmasi dan transaksi dilanjutkan melalui DM Threads.</p></div>
-<div class="how"><div class="step glass"><span class="stepnum">01</span><h3>Isi detail pesanan</h3><p>Masukkan nama dan username TradingView agar admin dapat mengidentifikasi akun untuk aktivasi.</p></div><div class="step glass"><span class="stepnum">02</span><h3>Salin & buka Threads</h3><p>Pesan dibuat otomatis. Tombol pemesanan menyalin teks lalu membuka chat Threads DAHLAH7.</p></div><div class="step glass"><span class="stepnum">03</span><h3>Transaksi bersama admin</h3><p>Tempel dan kirim pesan di Threads. Harga, pembayaran, dan pemberian akses dikonfirmasi dalam percakapan.</p></div></div></section>
-<section id="harga" class="section wrap"><div class="price glass"><div><div class="kicker">04 / ONE-TIME LICENSE</div><h2>One purchase.<br><span class="accent">Long-term access.</span></h2><p>Lisensi DAHLAH7 Scalper Pro menggunakan skema sekali bayar, tanpa subscription. Harga dan ketentuan aktivasi disampaikan oleh admin sebelum pembayaran.</p><ul class="ticks"><li>Satu indikator untuk TradingView</li><li>Model akses lifetime sesuai ketentuan lisensi</li><li>Tidak perlu akun pada website</li><li>Seluruh transaksi melalui DM Threads</li></ul></div>
-<div class="pricebox"><label>DAHLAH7 SCALPER PRO</label><h3>Harga via Threads</h3><div class="muted" style="font-size:10px;letter-spacing:.12em">ONE-TIME PAYMENT · LIFETIME</div><hr><div class="price-row"><span>Jenis lisensi</span><b>Lifetime</b></div><div class="price-row"><span>Biaya berulang</span><b>Tidak ada</b></div><div class="price-row"><span>Aktivasi</span><b>TradingView</b></div><div class="price-row"><span>Pembayaran</span><b>Melalui chat Threads</b></div><button type="button" class="btn primary btn-full" style="margin-top:18px" data-order>Pesan via Threads ↗</button><small>Trading memiliki risiko kerugian. Tidak ada profit atau win rate yang dijamin.</small></div></div></section>
-<section id="faq" class="section wrap"><div class="sectionhead"><div><div class="kicker">05 / FAQ</div><h2>Pertanyaan<br><span class="accent">yang sering muncul.</span></h2></div></div><div class="faq">
-<details><summary>Bagaimana cara membeli indikator?</summary><p>Klik Pesan via Threads, isi data, lalu klik Salin & Buka Chat Threads. Tempel pesan tersebut ke DM dan kirim. Admin akan menjelaskan harga, pembayaran, dan proses aktivasi.</p></details>
-<details><summary>Apakah perlu login atau daftar di website?</summary><p>Tidak. Website tidak menyediakan akun pembeli. Username TradingView diperlukan untuk proses aktivasi apabila akses indikator menggunakan invite-only.</p></details>
-<details><summary>Apakah ini subscription?</summary><p>Tidak. Produk ditawarkan dengan model pembayaran satu kali untuk lisensi lifetime. Cakupan akses, pembaruan, transfer, dan ketentuan lain perlu disepakati di chat sebelum membayar.</p></details>
-<details><summary>Apakah indikator dijamin tidak repaint dan selalu profit?</summary><p>Tidak ada jaminan profit. Sinyal yang dikonfirmasi saat candle ditutup tidak berarti semua elemen visual, zona, atau struktur pasar dijamin tidak berubah sepanjang waktu. Evaluasi dan manajemen risiko tetap diperlukan.</p></details>
-<details><summary>Apakah grafik demo merupakan hasil trading asli?</summary><p>Bukan. Grafik di website dibuat menggunakan data simulasi untuk memperlihatkan antarmuka, bukan data pasar real-time atau hasil backtest.</p></details>
-<details><summary>Apakah pesan langsung masuk otomatis ke kolom DM Threads?</summary><p>Belum. Threads belum memiliki deep link DM prefilled text yang terverifikasi. Website menyalin pesan dan membuka chat; pembeli perlu menempelkan dan mengirim pesan sendiri.</p></details></div></section>
-<section class="lastcta wrap glass"><div class="kicker">GET STARTED</div><h2>Keep the chart clear.<br><span class="accent">Keep the plan disciplined.</span></h2><p>Siap mendapatkan DAHLAH7 Scalper Pro? Mulai pesanan dan lanjutkan seluruh transaksi di Threads.</p><button type="button" class="btn primary" data-order>Buat Pesanan via Threads ↗</button></section></main>
-<footer><div class="wrap"><div class="footerline"><div class="logo"><span class="mark">D<b>7</b></span><span>DAHLAH<span style="color:var(--cyan)">7</span><small>TRADING TOOLS</small></span></div><div class="footlinks"><a href="#fitur">Fitur</a><a href="#demo">Demo</a><a href="#harga">Lisensi</a><a href="#faq">FAQ</a><a href="https://www.threads.com/messages/t/1143880444843814" target="_blank" rel="noopener noreferrer">DM Threads</a></div></div><div class="legal"><span>© <span id="year"></span> DAHLAH7. All rights reserved.</span><span>Alat analisis independen. Bukan nasihat investasi, bukan afiliasi resmi TradingView.</span></div></div></footer>
-<div class="liquid-menu-overlay" id="liquidMenuOverlay" role="dialog" aria-modal="true" aria-label="Menu navigasi DAHLAH7" hidden>
-  <div class="liquid-menu-panel">
-    <div class="liquid-menu-content"><div class="liquid-menu-eyebrow">DAHLAH7 / LIQUID GLASS NAVIGATION</div>
-      <nav class="liquid-menu-list" aria-label="Navigasi utama overlay">
-        <a href="#top"><span>01</span> Beranda</a>
-        <a href="#fitur"><span>02</span> Fitur Indikator</a>
-        <a href="#demo"><span>03</span> Live Preview</a>
-        <a href="#alur"><span>04</span> Cara Pesan</a>
-        <a href="#harga"><span>05</span> Lisensi</a>
-        <a href="#faq"><span>06</span> FAQ</a>
-      </nav>
-      <div class="liquid-menu-meta"><span>INDIKATOR TRADINGVIEW</span><span>·</span><span>PEMBAYARAN SEKALI</span><span>·</span><span>TRANSAKSI DI THREADS</span></div>
-      <div class="liquid-menu-bottom"><button type="button" class="btn primary" id="liquidMenuOrder">Pesan Sekarang ↗</button><button type="button" class="liquid-close" id="liquidMenuClose">Tutup ✕</button></div>
-    </div>
-    <span class="waterdrop" aria-hidden="true"></span><span class="waterdrop small" aria-hidden="true"></span><span class="waterdrop tiny" aria-hidden="true"></span>
+  <a class="skip-link" href="#konten">Langsung ke konten</a>
+  <div class="ambient" aria-hidden="true">
+    <span class="ambient__glow ambient__glow--a"></span>
+    <span class="ambient__glow ambient__glow--b"></span>
+    <span class="ambient__halo"></span>
+    <span class="ambient__grain"></span>
   </div>
-</div>
-<div class="overlay" id="orderModal" role="dialog" aria-modal="true" aria-labelledby="orderHeading" hidden><div class="dialog"><button type="button" class="close" id="closeModal" aria-label="Tutup dialog">×</button><div class="kicker">THREADS ORDER / LIFETIME</div><h2 id="orderHeading">Pesan Scalper Pro</h2><p>Isi data berikut. Website akan membuat pesan pemesanan untuk dikirim ke chat Threads DAHLAH7. Pembayaran hanya dibahas dalam chat.</p>
-<form id="form" class="form"><label for="buyer">Nama pembeli *</label><input id="buyer" name="buyer" required minlength="2" maxlength="80" autocomplete="name" placeholder="Nama kamu">
-<label for="tv">Username TradingView *</label><input id="tv" name="tv" required maxlength="100" placeholder="Contoh: username_tv">
-<label for="threads">Username Threads (opsional)</label><input id="threads" name="threads" maxlength="100" placeholder="Contoh: @username">
-<label for="note">Catatan (opsional)</label><textarea id="note" rows="2" maxlength="500" placeholder="Pertanyaan atau info tambahan"></textarea>
-<p class="notice">Tidak ada pembayaran atau penyimpanan data pribadi di situs ini. Pesan hanya diproses di browser dan dikirim oleh kamu sendiri melalui Threads.</p><button type="submit" class="btn primary btn-full">Siapkan Pesan Pemesanan ↗</button></form>
-<div id="result" hidden><label for="messageText" style="display:block;font-size:12px;font-weight:800;margin:16px 0 7px">Pesan siap dikirim</label><textarea id="messageText" rows="9" readonly aria-label="Teks pesanan siap disalin"></textarea><p class="notice">Klik tombol utama untuk menyalin pesan dan membuka Threads. Setelah chat terbuka, tempel teks dengan Paste lalu tekan Kirim. Pengisian kolom DM secara otomatis belum didukung Threads.</p>
-<div class="result-actions"><button class="btn primary wide" id="goThreads" type="button">Salin Pesan & Buka Chat Threads ↗</button><button class="btn secondary" id="copyOnly" type="button">Salin Saja</button><a class="btn secondary" href="https://www.threads.com/messages/t/1143880444843814" target="_blank" rel="noopener noreferrer">Buka Chat Threads ↗</a><button class="btn secondary wide" id="edit" type="button">Ubah Pesanan</button></div></div></div></div>
-<div class="toast" id="toast" role="status" aria-live="polite"></div>
-<script>
-(function(){
-'use strict';
-var THREADS='https://www.threads.com/messages/t/1143880444843814';
-var $=function(s){return document.querySelector(s);};
-var $$=function(s){return Array.from(document.querySelectorAll(s));};
-$('#year').textContent=new Date().getFullYear();
-var modal=$('#orderModal'), menu=$('#links'),lastFocus=null;
-function openOrder(){lastFocus=document.activeElement;modal.hidden=false;document.body.style.overflow='hidden';$('#closeModal').focus();}
-function closeOrder(){modal.hidden=true;document.body.style.overflow='';if(lastFocus&&lastFocus.focus)lastFocus.focus();}
-$$('[data-order]').forEach(function(el){el.addEventListener('click',openOrder);});
-$('#closeModal').addEventListener('click',closeOrder);
-modal.addEventListener('mousedown',function(e){if(e.target===modal)closeOrder();});
-document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!modal.hidden)closeOrder();if(e.key==='Tab'&&!modal.hidden){var list=$$('button,a,input,textarea').filter(function(x){return modal.contains(x)&&x.getClientRects().length;});if(!list.length)return;var a=list[0],z=list[list.length-1];if(e.shiftKey&&document.activeElement===a){e.preventDefault();z.focus();}else if(!e.shiftKey&&document.activeElement===z){e.preventDefault();a.focus();}}});
-$('#menuBtn').addEventListener('click',function(){var opened=menu.classList.toggle('open');this.setAttribute('aria-expanded',String(opened));this.setAttribute('aria-label',opened?'Tutup navigasi':'Buka navigasi');});
-$$('#links a').forEach(function(el){el.addEventListener('click',function(){menu.classList.remove('open');$('#menuBtn').setAttribute('aria-expanded','false');});});
-var message=$('#messageText'),toastT;
-function notify(value){var t=$('#toast');t.textContent=value;t.classList.add('show');clearTimeout(toastT);toastT=setTimeout(function(){t.classList.remove('show');},3200);}
-$('#form').addEventListener('submit',function(e){
-e.preventDefault();if(!this.reportValidity())return;
-var name=$('#buyer').value.trim(),tv=$('#tv').value.trim(),threads=$('#threads').value.trim(),note=$('#note').value.trim();
-if(name.length<2||!tv){notify('Nama dan username TradingView wajib diisi.');return;}
-var lines=['Halo Admin DAHLAH7, saya ingin memesan indikator DAHLAH7 Scalper Pro.','','Nama: '+name,'Username TradingView: '+tv];
-if(threads)lines.push('Username Threads: '+threads);
-lines.push('Produk: DAHLAH7 Scalper Pro','Jenis lisensi: Lifetime / sekali bayar');
-if(note)lines.push('Catatan: '+note);
-lines.push('','Mohon info harga, ketentuan lisensi, metode pembayaran, serta proses aktivasi. Terima kasih.');
-message.value=lines.join('\n');this.hidden=true;$('#result').hidden=false;$('#goThreads').focus();
-});
-$('#edit').addEventListener('click',function(){$('#result').hidden=true;$('#form').hidden=false;$('#buyer').focus();});
-async function copyMessage(){try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(message.value);return true;}message.focus();message.select();return document.execCommand('copy');}catch(e){return false;}}
-$('#copyOnly').addEventListener('click',async function(){var copied=await copyMessage();if(copied)notify('Pesan disalin. Tempel ke DM Threads.');else{message.focus();message.select();notify('Clipboard diblokir. Salin teks manual.');}});
-$('#goThreads').addEventListener('click',async function(){var copied=await copyMessage();if(!copied){message.focus();message.select();notify('Clipboard diblokir. Salin manual, lalu buka Threads.');return;}window.location.assign(THREADS);});
-$$('.faq details').forEach(function(el){el.addEventListener('toggle',function(){if(el.open)$$('.faq details').forEach(function(other){if(other!==el)other.open=false;});});});
-var NS='http://www.w3.org/2000/svg';
-function node(k,a,t){var x=document.createElementNS(NS,k);Object.keys(a||{}).forEach(function(key){x.setAttribute(key,String(a[key]));});if(t!==undefined)x.textContent=t;return x;}
-function draw(svg,seed,width,height){svg.replaceChildren();var m=40,r=width-65,top=20,bottom=height-42;var rng=seed>>>0;
-function random(){rng=(1664525*rng+1013904223)>>>0;return rng/4294967296;}
-var n=width>700?64:34, vals=[],v=84;
-for(var i=0;i<n;i++){v+=(i<n*.2?.45:i<n*.45?-.3:i<n*.62?.75:.22)+(random()-.5)*5.2;vals.push(v);}
-var min=Math.min.apply(null,vals)-10,max=Math.max.apply(null,vals)+16;
-function y(x){return bottom-(x-min)/(max-min)*(bottom-top);}
-for(var g=0;g<6;g++){var yy=top+(bottom-top)*g/5;svg.append(node('line',{x1:m,y1:yy,x2:width-8,y2:yy,stroke:'#94bdd1','stroke-opacity':'.15','stroke-dasharray':'4 6'}));}
-var sp=(r-m)/(n-1),zone=vals[Math.floor(n*.48)];
-svg.append(node('rect',{x:m+sp*n*.34,y:y(zone+4),width:sp*n*.4,height:Math.max(5,y(zone-4)-y(zone+4)),fill:'#6cf3da','fill-opacity':'.075',stroke:'#80f8df','stroke-opacity':'.24','stroke-dasharray':'5 4'}));
-vals.forEach(function(c,i){var o=i?vals[i-1]:84,h=Math.max(o,c)+random()*3,l=Math.min(o,c)-random()*3,x=m+i*sp,color=c>=o?'#70ebd1':'#ef819d',yw=y(Math.max(o,c)),yh=y(Math.min(o,c));svg.append(node('line',{x1:x,y1:y(h),x2:x,y2:y(l),stroke:color,'stroke-width':'1.3'}));svg.append(node('rect',{x:x-Math.max(2,sp*.26),y:yw,width:Math.max(4,sp*.52),height:Math.max(1.5,yh-yw),fill:color,rx:'.7'}));});
-var entry=vals[Math.floor(n*.68)],levels=[['TP3',entry+13,'#7bf5d9'],['TP2',entry+9,'#7bf5d9'],['TP1',entry+5,'#7bf5d9'],['ENTRY',entry,'#9fcdff'],['SL',entry-7,'#ff9eb9']];
-levels.forEach(function(q){var z=y(q[1]);if(z<top||z>bottom)return;svg.append(node('line',{x1:width*.66,y1:z,x2:width-52,y2:z,stroke:q[2],'stroke-width':'1.2','stroke-opacity':'.83','stroke-dasharray':'5 4'}));svg.append(node('rect',{x:width-54,y:z-9,width:49,height:18,rx:4,fill:'#132e44',stroke:q[2],'stroke-opacity':'.4'}));svg.append(node('text',{x:width-29.5,y:z+3.5,'text-anchor':'middle',fill:q[2],'font-size':'10','font-weight':'700'},q[0]));});
-var bx=m+Math.floor(n*.57)*sp,by=y(vals[Math.floor(n*.57)])+24;
-svg.append(node('path',{d:'M '+(bx-6)+' '+by+' L '+bx+' '+(by-11)+' L '+(bx+6)+' '+by+' Z',fill:'#77f3d7'}));svg.append(node('text',{x:bx,y:by+13,'text-anchor':'middle',fill:'#75f1d3','font-size':'11','font-weight':'700'},'BUY'));
-}
-draw($('#heroChart'),110,550,340);draw($('#demoChart'),110,980,365);
-$$('.tf').forEach(function(b){b.addEventListener('click',function(){$$('.tf').forEach(function(x){x.setAttribute('aria-pressed',String(x===b));});draw($('#demoChart'),b.dataset.tf==='M15'?110:b.dataset.tf==='M30'?325:774,980,365);});});
-})();
-</script>
-<script src="./liquid-glass.js?v=2"></script>
-</body></html>
+
+  <header class="site-header">
+    <div class="nav-glass">
+      <a href="#atas" class="brand" aria-label="DAHLAH7, kembali ke beranda">
+        <span class="brand__mark" aria-hidden="true"><span>D</span><b>7</b></span>
+        <span class="brand__name">DAHLAH<span>7</span><small>TRADING TOOLS</small></span>
+      </a>
+      <nav class="desktop-nav" aria-label="Navigasi utama">
+        <a href="#fitur">Fitur</a>
+        <a href="#preview">Tampilan</a>
+        <a href="#cara-pesan">Cara pesan</a>
+        <a href="#lisensi">Lisensi</a>
+      </nav>
+      <div class="nav-actions">
+        <button type="button" class="button button--nav" data-order>Beli lifetime <span aria-hidden="true">↗</span></button>
+        <button type="button" class="menu-trigger" id="menuTrigger" aria-haspopup="dialog" aria-controls="menuDialog" aria-label="Buka menu">
+          <span class="menu-trigger__bars" aria-hidden="true"><i></i><i></i></span>
+        </button>
+      </div>
+      <span class="glass-droplet glass-droplet--one" aria-hidden="true"></span>
+      <span class="glass-droplet glass-droplet--two" aria-hidden="true"></span>
+    </div>
+  </header>
+
+  <dialog id="menuDialog" class="glass-dialog menu-dialog" aria-labelledby="menuTitle">
+    <div class="menu-dialog__top">
+      <span class="eyebrow" id="menuTitle">DAHLAH7 / NAVIGASI</span>
+      <button class="close-icon" type="button" data-close-menu aria-label="Tutup menu">×</button>
+    </div>
+    <nav class="menu-dialog__links" aria-label="Navigasi seluler">
+      <a href="#atas">Beranda <span>01</span></a>
+      <a href="#fitur">Fitur indikator <span>02</span></a>
+      <a href="#preview">Tampilan <span>03</span></a>
+      <a href="#cara-pesan">Cara pesan <span>04</span></a>
+      <a href="#lisensi">Lisensi <span>05</span></a>
+      <a href="#faq">FAQ <span>06</span></a>
+    </nav>
+    <div class="menu-dialog__foot">
+      <p>Sekali bayar. Tanpa langganan.</p>
+      <button type="button" class="button button--light" data-menu-order>Mulai pesan <span aria-hidden="true">↗</span></button>
+    </div>
+  </dialog>
+
+  <main id="konten">
+    <section id="atas" class="hero container">
+      <div class="hero__copy">
+        <p class="eyebrow"><span class="eyebrow__line"></span> DAHLAH7 / SCALPER PRO</p>
+        <h1>Trading lebih <em>jernih.</em><br>Keputusan lebih <span>terarah.</span></h1>
+        <p class="hero__lead">Sinyal BUY/SELL, struktur pasar, dan level risiko dalam satu indikator TradingView. Fokus pada rencana trading, bukan menebak pergerakan harga.</p>
+        <div class="hero__actions">
+          <button type="button" class="button button--primary" data-order>Pesan akses lifetime <span aria-hidden="true">↗</span></button>
+          <a class="button button--quiet" href="#preview">Lihat tampilannya <span aria-hidden="true">↓</span></a>
+        </div>
+        <div class="hero__notes" aria-label="Keunggulan lisensi">
+          <span><i aria-hidden="true"></i> Sekali bayar</span>
+          <span><i aria-hidden="true"></i> Tanpa akun website</span>
+          <span><i aria-hidden="true"></i> Transaksi via Threads</span>
+        </div>
+      </div>
+
+      <div class="hero__art">
+        <div class="hero__ring" aria-hidden="true"></div>
+        <div class="visual-card liquid-panel">
+          <div class="visual-card__header">
+            <span class="visual-card__identity"><span class="visual-card__lights" aria-hidden="true"><i></i><i></i><i></i></span> DAHLAH7 / CHART PREVIEW</span>
+            <span class="chip chip--subtle">BTCUSDT · M15</span>
+          </div>
+          <svg class="market-chart market-chart--hero" id="heroChart" viewBox="0 0 780 350" role="img" aria-label="Contoh visual candlestick indikator dengan zona, sinyal, Entry, SL, dan TP. Data simulasi."></svg>
+          <div class="visual-card__bottom">
+            <span><span class="status-dot" aria-hidden="true"></span> Contoh tampilan indikator</span>
+            <span>DATA SIMULASI</span>
+          </div>
+        </div>
+        <div class="visual-float visual-float--buy liquid-panel" aria-hidden="true">
+          <span class="visual-float__dot">↗</span>
+          <span><b>Signal confirmed</b><small>Setelah candle ditutup</small></span>
+        </div>
+        <div class="visual-float visual-float--level liquid-panel" aria-hidden="true">
+          <span class="visual-float__kicker">RISK MAPPING</span>
+          <strong>ENTRY / SL / TP</strong>
+          <span class="visual-float__line"><i></i><i></i><i></i></span>
+        </div>
+      </div>
+    </section>
+
+    <div class="band-wrap container" aria-label="Fungsi inti indikator">
+      <div class="band liquid-panel">
+        <span>PRICE ACTION</span><i aria-hidden="true">/</i>
+        <span>SMART MONEY CONCEPTS</span><i aria-hidden="true">/</i>
+        <span>RISK MANAGEMENT</span><i aria-hidden="true">/</i>
+        <span>TREND CONTEXT</span>
+      </div>
+    </div>
+
+    <section id="fitur" class="section container">
+      <div class="section-heading">
+        <div><p class="eyebrow">01 / KEMAMPUAN</p><h2>Satu chart.<br><span class="heading-soft">Banyak konteks.</span></h2></div>
+        <p>Komponen teknikal dipadukan untuk membantu membaca setup dan menentukan batas risiko secara lebih konsisten.</p>
+      </div>
+      <div class="feature-grid">
+        <article class="feature liquid-panel">
+          <span class="feature__symbol feature__symbol--a" aria-hidden="true">↗</span>
+          <h3>Sinyal BUY / SELL</h3>
+          <p>Penanda sinyal setelah penutupan candle untuk membantu identifikasi peluang.</p>
+          <span class="feature__index">01</span>
+        </article>
+        <article class="feature liquid-panel">
+          <span class="feature__symbol feature__symbol--b" aria-hidden="true">⊞</span>
+          <h3>Entry, SL & TP</h3>
+          <p>Proyeksi level entry, stop loss, dan tiga target take profit berbasis ATR.</p>
+          <span class="feature__index">02</span>
+        </article>
+        <article class="feature liquid-panel">
+          <span class="feature__symbol feature__symbol--c" aria-hidden="true">⌁</span>
+          <h3>BOS / CHoCH</h3>
+          <p>Struktur pasar internal dan swing untuk membaca kelanjutan atau perubahan tren.</p>
+          <span class="feature__index">03</span>
+        </article>
+        <article class="feature liquid-panel">
+          <span class="feature__symbol feature__symbol--d" aria-hidden="true">◫</span>
+          <h3>Order Block & FVG</h3>
+          <p>Identifikasi area order block dan fair value gap yang relevan pada chart.</p>
+          <span class="feature__index">04</span>
+        </article>
+        <article class="feature liquid-panel">
+          <span class="feature__symbol feature__symbol--e" aria-hidden="true">≋</span>
+          <h3>Trend Cloud & ADX</h3>
+          <p>Visual arah tren dan konteks pasar sideways sebelum mengambil keputusan.</p>
+          <span class="feature__index">05</span>
+        </article>
+        <article class="feature liquid-panel">
+          <span class="feature__symbol feature__symbol--f" aria-hidden="true">◇</span>
+          <h3>EQH / EQL & Zona</h3>
+          <p>Equal highs/lows serta area premium, discount, dan equilibrium.</p>
+          <span class="feature__index">06</span>
+        </article>
+      </div>
+    </section>
+
+    <section id="preview" class="section section--preview">
+      <div class="container">
+        <div class="section-heading">
+          <div><p class="eyebrow">02 / TAMPILAN</p><h2>Baca strukturnya.<br><span class="heading-soft">Rencanakan risikonya.</span></h2></div>
+          <p>Pratinjau interaktif untuk melihat cara informasi sinyal dan level trading ditampilkan.</p>
+        </div>
+        <div class="preview-panel liquid-panel">
+          <div class="preview-panel__top">
+            <div class="preview-panel__title">
+              <span class="eyebrow">DAHLAH7 / PREVIEW</span>
+              <h3>Market structure overview</h3>
+            </div>
+            <div class="timeframes" role="group" aria-label="Pilih timeframe simulasi">
+              <button type="button" data-timeframe="M15" aria-pressed="true">M15</button>
+              <button type="button" data-timeframe="M30" aria-pressed="false">M30</button>
+              <button type="button" data-timeframe="H1" aria-pressed="false">H1</button>
+            </div>
+          </div>
+          <svg id="previewChart" class="market-chart market-chart--wide" viewBox="0 0 970 400" role="img" aria-label="Simulasi grafik candlestick pada M15, dilengkapi level risiko dan struktur."></svg>
+          <div class="preview-panel__footer">
+            <div class="legend"><span><i class="legend__buy"></i> BUY</span><span><i class="legend__zone"></i> Area analisis</span><span><i class="legend__risk"></i> Entry / SL / TP</span></div>
+            <small>Ilustrasi antarmuka, bukan data live atau hasil backtest.</small>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="cara-pesan" class="section container">
+      <div class="section-heading">
+        <div><p class="eyebrow">03 / CARA PESAN</p><h2>Langsung ke<br><span class="heading-soft">percakapan.</span></h2></div>
+        <p>Tidak ada keranjang, akun, atau pembayaran di website. Seluruh transaksi diselesaikan melalui DM Threads.</p>
+      </div>
+      <ol class="steps">
+        <li class="step"><span class="step__number">01</span><div><h3>Isi formulir singkat</h3><p>Masukkan nama dan username TradingView untuk menyiapkan permintaan pembelian.</p></div></li>
+        <li class="step"><span class="step__number">02</span><div><h3>Salin pesan</h3><p>Website membuat teks pesanan dan membukakan chat Threads setelah pesan disalin.</p></div></li>
+        <li class="step"><span class="step__number">03</span><div><h3>Konfirmasi di Threads</h3><p>Tempel dan kirim pesan. Harga, pembayaran, serta aktivasi dikonfirmasi oleh admin.</p></div></li>
+      </ol>
+    </section>
+
+    <section id="lisensi" class="section container">
+      <div class="pricing liquid-panel">
+        <div class="pricing__copy">
+          <p class="eyebrow">04 / LISENSI</p>
+          <h2>Bayar sekali.<br><span class="heading-soft">Pakai jangka panjang.</span></h2>
+          <p>DAHLAH7 Scalper Pro ditawarkan dalam model lisensi lifetime tanpa biaya langganan berkala.</p>
+          <div class="pricing__tags"><span>ONE-TIME PURCHASE</span><span>NO SUBSCRIPTION</span></div>
+        </div>
+        <div class="pricing__offer">
+          <p>DAHLAH7 SCALPER PRO</p>
+          <h3>Harga via Threads</h3>
+          <ul>
+            <li><span>Lisensi</span><strong>Lifetime</strong></li>
+            <li><span>Langganan</span><strong>Tidak ada</strong></li>
+            <li><span>Platform</span><strong>TradingView</strong></li>
+            <li><span>Transaksi</span><strong>DM Threads</strong></li>
+          </ul>
+          <button type="button" class="button button--primary button--block" data-order>Mulai pemesanan <span aria-hidden="true">↗</span></button>
+          <small>Harga dan ketentuan akses dikonfirmasi sebelum pembayaran.</small>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq" class="section section--faq container">
+      <div class="section-heading section-heading--faq">
+        <div><p class="eyebrow">05 / FAQ</p><h2>Perlu tahu<br><span class="heading-soft">sebelum membeli?</span></h2></div>
+      </div>
+      <div class="faq-list">
+        <details><summary>Apakah wajib membuat akun di website?</summary><p>Tidak. Website ini tidak menggunakan sistem akun. Username TradingView diperlukan untuk mengatur akses indikator.</p></details>
+        <details><summary>Apakah lisensi lifetime harus diperpanjang?</summary><p>Tidak ada biaya langganan berkala. Rincian cakupan akses lifetime dan aktivasi dikonfirmasi di Threads sebelum pembelian.</p></details>
+        <details><summary>Apakah indikator menjamin profit atau tanpa repaint?</summary><p>Tidak ada jaminan profit. Sinyal BUY/SELL ditentukan pada candle yang telah ditutup, tetapi elemen struktur pasar dan zona dapat berubah ketika data baru terbentuk.</p></details>
+        <details><summary>Apakah pesan langsung terisi di Threads?</summary><p>Website menyiapkan dan menyalin teks pesanan, lalu membuka chat Threads. Pembeli perlu menempelkan teks ke kolom DM dan mengirimnya.</p></details>
+      </div>
+    </section>
+
+    <section class="outro container">
+      <div class="outro__glass liquid-panel">
+        <p class="eyebrow">DAHLAH7 / SCALPER PRO</p>
+        <h2>Lebih jelas melihat pasar.<br><span>Lebih disiplin mengambil keputusan.</span></h2>
+        <button type="button" class="button button--primary" data-order>Buat pesanan <span aria-hidden="true">↗</span></button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__main">
+      <a href="#atas" class="brand brand--footer"><span class="brand__mark" aria-hidden="true"><span>D</span><b>7</b></span><span class="brand__name">DAHLAH<span>7</span><small>TRADING TOOLS</small></span></a>
+      <p>Analisis lebih terstruktur. Keputusan tetap di tangan trader.</p>
+      <a href="https://www.threads.com/messages/t/1143880444843814" target="_blank" rel="noopener noreferrer">Chat di Threads ↗</a>
+    </div>
+    <div class="container footer__legal">
+      <span>© <span id="year"></span> DAHLAH7.</span>
+      <span>Trading berisiko. Indikator ini bukan jaminan hasil maupun nasihat investasi. Tidak berafiliasi dengan TradingView.</span>
+    </div>
+  </footer>
+
+  <dialog id="orderDialog" class="glass-dialog order-dialog" aria-labelledby="orderTitle">
+    <div class="order-dialog__head">
+      <div><span class="eyebrow">PESAN MELALUI THREADS</span><h2 id="orderTitle">DAHLAH7 Scalper Pro</h2></div>
+      <button type="button" class="close-icon" data-close-order aria-label="Tutup formulir">×</button>
+    </div>
+    <form id="orderForm">
+      <label for="buyerName">Nama pembeli <span>*</span></label>
+      <input id="buyerName" name="name" type="text" required minlength="2" maxlength="80" autocomplete="name" placeholder="Nama kamu">
+      <label for="tradingViewUsername">Username TradingView <span>*</span></label>
+      <input id="tradingViewUsername" name="tradingViewUsername" type="text" required minlength="2" maxlength="70" autocapitalize="none" spellcheck="false" placeholder="Username TradingView">
+      <label for="threadsUsername">Username Threads <small>(opsional)</small></label>
+      <input id="threadsUsername" name="threadsUsername" type="text" maxlength="70" autocapitalize="none" spellcheck="false" placeholder="@username">
+      <label for="orderNote">Catatan <small>(opsional)</small></label>
+      <textarea id="orderNote" name="note" rows="2" maxlength="280" placeholder="Pertanyaan tambahan"></textarea>
+      <button type="submit" class="button button--primary button--block">Siapkan pesan <span aria-hidden="true">→</span></button>
+    </form>
+    <div id="orderPreview" hidden>
+      <label for="orderMessage">Pesan pemesanan</label>
+      <textarea id="orderMessage" rows="9" readonly></textarea>
+      <button type="button" class="button button--primary button--block" id="copyAndOpen">Salin & buka Threads <span aria-hidden="true">↗</span></button>
+      <div class="order-dialog__alternative">
+        <button type="button" id="copyOnly">Salin saja</button>
+        <button type="button" id="editOrder">Ubah data</button>
+        <a href="https://www.threads.com/messages/t/1143880444843814" target="_blank" rel="noopener noreferrer">Buka chat Threads ↗</a>
+      </div>
+      <p class="order-dialog__helper">Tempel teks ke chat Threads, lalu tekan Kirim.</p>
+    </div>
+    <p class="order-dialog__status" id="orderStatus" aria-live="polite" role="status"></p>
+    <p class="order-dialog__privacy">Data hanya digunakan untuk menyusun pesan di browser. Tidak ada pembayaran atau penyimpanan pesanan di website ini.</p>
+  </dialog>
+</body>
+</html>
