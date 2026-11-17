@@ -1,0 +1,29 @@
+name: Scalper quality checks
+on:
+  pull_request:
+    paths:
+      - "scalper-pro/**"
+      - ".github/workflows/scalper-quality.yml"
+  push:
+    branches: [main]
+    paths:
+      - "scalper-pro/**"
+      - ".github/workflows/scalper-quality.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+      - name: Verify scripts
+        run: |
+          node --version
+          node --check scalper-pro/order.mjs
+          node --check scalper-pro/app.mjs
+      - name: Contract tests
+        run: node --test scalper-pro/tests/*.test.mjs
