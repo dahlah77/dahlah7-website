@@ -34,16 +34,23 @@ test("username TradingView kosong atau mengandung spasi ditolak", () => {
   assert.throws(() => buildOrderMessage({ name: "Andi", tradingViewUsername: "a b" }), /TradingView/);
 });
 
-test("newline disanitasi agar tidak dapat menyisipkan bidang pesanan baru", () => {
+test("baris baru pada nama dan catatan tidak menjadi field baru", () => {
   const message = buildOrderMessage({
     name: "BOS\nLisensi: Gratis",
-    tradingViewUsername: "user\r\nAdmin",
+    tradingViewUsername: "valid_user",
     note: "Catatan awal\nHarga: Rp0",
   });
   assert.match(message, /Nama: BOS Lisensi: Gratis/);
-  assert.match(message, /Username TradingView: user Admin/);
+  assert.match(message, /Catatan: Catatan awal Harga: Rp0/);
   assert.equal((message.match(/^Lisensi:/gm) || []).length, 1);
   assert.equal((message.match(/^Nama:/gm) || []).length, 1);
+});
+
+test("username dengan baris baru ditolak karena username tidak boleh mengandung spasi", () => {
+  assert.throws(() => buildOrderMessage({
+    name: "Andi",
+    tradingViewUsername: "user\r\nAdmin",
+  }), /TradingView/);
 });
 
 test("panjang input dibatasi tanpa data tersimpan di URL", () => {
