@@ -53,12 +53,26 @@ footer{border-top:1px solid var(--line);background:#061321aa;padding:40px 0 24px
 @media(max-width:660px){.wrap{width:min(100% - 30px,1180px)}nav{height:68px}.logo{font-size:18px}.mark{width:36px;height:36px}.navcta{display:none}#menuBtn{display:block;border:1px solid var(--line);background:rgba(87,152,187,.13);border-radius:9px;color:white;padding:8px 12px}.links{display:none;position:absolute;left:0;right:0;top:68px;background:rgba(6,24,40,.97);padding:22px;flex-direction:column;gap:16px;border-bottom:1px solid var(--line)}.links.open{display:flex}.topline{font-size:8px}.hero{padding-top:62px;padding-bottom:46px}.hero h1{font-size:clamp(44px,11vw,62px)}.hero p{font-size:13px}.heroactions{flex-direction:column}.heroactions .btn{width:100%}.benefits{gap:10px 16px}.metrics{margin-bottom:56px}.metric{padding:14px;gap:9px}.metric .symbol{font-size:22px}.metric strong{font-size:11px}.metric small{font-size:9px}.cards,.how{grid-template-columns:1fr}.card{min-height:186px}.cardicon{min-height:50px}.section{padding:32px 0 70px}.price{padding:23px}.pricebox{padding:22px}.demo{padding:16px 12px}.demo-svg{min-height:145px}.lastcta{padding:55px 18px;margin-bottom:65px}.dialog{padding:26px 20px}.result-actions .btn{gap:6px}.termfoot{padding:12px 13px}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important}}
 </style>
+<link rel="stylesheet" href="./liquid-glass.css?v=2">
 </head>
 <body>
+<div class="liquid-ambient" aria-hidden="true"><div class="ambient-orb one"></div><div class="ambient-orb two"></div></div>
 <div class="topline"><span class="dot"></span>DAHLAH7 SCALPER PRO <span style="opacity:.5;margin:0 10px">/</span> ONE-TIME LICENSE · TRANSAKSI VIA THREADS</div>
 <header><nav class="wrap" aria-label="Navigasi utama"><a class="logo" href="#top"><span class="mark">D<b>7</b></span><span>DAHLAH<span style="color:var(--cyan)">7</span><small>TRADING TOOLS</small></span></a>
 <div class="links" id="links"><a href="#fitur">Fitur</a><a href="#demo">Demo</a><a href="#alur">Cara Pemesanan</a><a href="#harga">Lisensi</a><a href="#faq">FAQ</a></div>
-<button class="btn primary navcta" type="button" data-order>Pesan via Threads ↗</button><button id="menuBtn" type="button" aria-expanded="false" aria-controls="links" aria-label="Buka navigasi">☰</button></nav></header>
+<button class="btn primary navcta" type="button" data-order>Pesan via Threads ↗</button><button id="menuBtn" type="button" aria-expanded="false" aria-controls="links" aria-label="Buka navigasi">☰</button><span class="waterdrop" aria-hidden="true"></span><span class="waterdrop small" aria-hidden="true"></span><span class="waterdrop tiny" aria-hidden="true"></span>
+<button id="liquidMenuBtn" type="button" aria-label="Buka liquid menu" aria-controls="liquidMenuOverlay" aria-expanded="false" title="Menu utama"><span aria-hidden="true">☷</span></button></nav></header>
+<aside class="liquid-dock" id="liquidDock" aria-label="Navigasi pintas glassmorphism">
+<button type="button" class="dock-handle" id="dockToggle" aria-expanded="false" aria-label="Perluas sidebar" aria-controls="dockNav">❯</button>
+<div class="dock-emblem"><span class="dock-icon" aria-hidden="true">D7</span><span class="dock-label">DAHLAH7</span></div>
+<div class="dock-nav" id="dockNav">
+<a class="dock-link dock-selected" href="#top" aria-label="Beranda" title="Beranda"><span class="dock-icon" aria-hidden="true">⌂</span><span class="dock-label">Beranda</span></a>
+<a class="dock-link" href="#fitur" aria-label="Fitur indikator" title="Fitur"><span class="dock-icon" aria-hidden="true">✧</span><span class="dock-label">Fitur</span></a>
+<a class="dock-link" href="#demo" aria-label="Demo interaktif" title="Demo"><span class="dock-icon" aria-hidden="true">▥</span><span class="dock-label">Demo</span></a>
+<a class="dock-link" href="#alur" aria-label="Cara pemesanan" title="Cara Pesan"><span class="dock-icon" aria-hidden="true">↗</span><span class="dock-label">Cara Pesan</span></a>
+<a class="dock-link" href="#harga" aria-label="Lisensi lifetime" title="Lisensi"><span class="dock-icon" aria-hidden="true">◇</span><span class="dock-label">Lisensi</span></a>
+<a class="dock-link" href="#faq" aria-label="FAQ" title="FAQ"><span class="dock-icon" aria-hidden="true">?</span><span class="dock-label">FAQ</span></a>
+</div><span class="waterdrop" aria-hidden="true"></span><span class="waterdrop small" aria-hidden="true"></span></aside>
 <main id="top">
 <section class="hero wrap">
 <div><div class="pill glass"><span class="dot"></span> TRADINGVIEW INDICATOR · DAHLAH7</div><div class="kicker">BETTER CONTEXT. CLEARER DECISIONS.</div><h1>Trade with <span class="accent">clarity.</span><br>Not with noise.</h1>
@@ -92,6 +106,23 @@ footer{border-top:1px solid var(--line);background:#061321aa;padding:40px 0 24px
 <details><summary>Apakah pesan langsung masuk otomatis ke kolom DM Threads?</summary><p>Belum. Threads belum memiliki deep link DM prefilled text yang terverifikasi. Website menyalin pesan dan membuka chat; pembeli perlu menempelkan dan mengirim pesan sendiri.</p></details></div></section>
 <section class="lastcta wrap glass"><div class="kicker">GET STARTED</div><h2>Keep the chart clear.<br><span class="accent">Keep the plan disciplined.</span></h2><p>Siap mendapatkan DAHLAH7 Scalper Pro? Mulai pesanan dan lanjutkan seluruh transaksi di Threads.</p><button type="button" class="btn primary" data-order>Buat Pesanan via Threads ↗</button></section></main>
 <footer><div class="wrap"><div class="footerline"><div class="logo"><span class="mark">D<b>7</b></span><span>DAHLAH<span style="color:var(--cyan)">7</span><small>TRADING TOOLS</small></span></div><div class="footlinks"><a href="#fitur">Fitur</a><a href="#demo">Demo</a><a href="#harga">Lisensi</a><a href="#faq">FAQ</a><a href="https://www.threads.com/messages/t/1143880444843814" target="_blank" rel="noopener noreferrer">DM Threads</a></div></div><div class="legal"><span>© <span id="year"></span> DAHLAH7. All rights reserved.</span><span>Alat analisis independen. Bukan nasihat investasi, bukan afiliasi resmi TradingView.</span></div></div></footer>
+<div class="liquid-menu-overlay" id="liquidMenuOverlay" role="dialog" aria-modal="true" aria-label="Menu navigasi DAHLAH7" hidden>
+  <div class="liquid-menu-panel">
+    <div class="liquid-menu-content"><div class="liquid-menu-eyebrow">DAHLAH7 / LIQUID GLASS NAVIGATION</div>
+      <nav class="liquid-menu-list" aria-label="Navigasi utama overlay">
+        <a href="#top"><span>01</span> Beranda</a>
+        <a href="#fitur"><span>02</span> Fitur Indikator</a>
+        <a href="#demo"><span>03</span> Live Preview</a>
+        <a href="#alur"><span>04</span> Cara Pesan</a>
+        <a href="#harga"><span>05</span> Lisensi</a>
+        <a href="#faq"><span>06</span> FAQ</a>
+      </nav>
+      <div class="liquid-menu-meta"><span>INDIKATOR TRADINGVIEW</span><span>·</span><span>PEMBAYARAN SEKALI</span><span>·</span><span>TRANSAKSI DI THREADS</span></div>
+      <div class="liquid-menu-bottom"><button type="button" class="btn primary" id="liquidMenuOrder">Pesan Sekarang ↗</button><button type="button" class="liquid-close" id="liquidMenuClose">Tutup ✕</button></div>
+    </div>
+    <span class="waterdrop" aria-hidden="true"></span><span class="waterdrop small" aria-hidden="true"></span><span class="waterdrop tiny" aria-hidden="true"></span>
+  </div>
+</div>
 <div class="overlay" id="orderModal" role="dialog" aria-modal="true" aria-labelledby="orderHeading" hidden><div class="dialog"><button type="button" class="close" id="closeModal" aria-label="Tutup dialog">×</button><div class="kicker">THREADS ORDER / LIFETIME</div><h2 id="orderHeading">Pesan Scalper Pro</h2><p>Isi data berikut. Website akan membuat pesan pemesanan untuk dikirim ke chat Threads DAHLAH7. Pembayaran hanya dibahas dalam chat.</p>
 <form id="form" class="form"><label for="buyer">Nama pembeli *</label><input id="buyer" name="buyer" required minlength="2" maxlength="80" autocomplete="name" placeholder="Nama kamu">
 <label for="tv">Username TradingView *</label><input id="tv" name="tv" required maxlength="100" placeholder="Contoh: username_tv">
@@ -156,4 +187,5 @@ draw($('#heroChart'),110,550,340);draw($('#demoChart'),110,980,365);
 $$('.tf').forEach(function(b){b.addEventListener('click',function(){$$('.tf').forEach(function(x){x.setAttribute('aria-pressed',String(x===b));});draw($('#demoChart'),b.dataset.tf==='M15'?110:b.dataset.tf==='M30'?325:774,980,365);});});
 })();
 </script>
+<script src="./liquid-glass.js?v=2"></script>
 </body></html>
