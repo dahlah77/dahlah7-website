@@ -17,7 +17,7 @@
 
 *, *::before, *::after { box-sizing: border-box; }
 html { scroll-behavior: smooth; scroll-padding-top: 120px; }
-body { min-width: 320px; margin: 0; color: var(--text); background: var(--ink); font: 400 15px/1.65 var(--font); -webkit-font-smoothing: antialiased; }
+body { min-width: 320px; margin: 0; color: var(--text); background: var(--ink); isolation: isolate; font: 400 15px/1.65 var(--font); -webkit-font-smoothing: antialiased; }
 button, input, textarea { font: inherit; }
 button { cursor: pointer; }
 button, a { -webkit-tap-highlight-color: transparent; }
